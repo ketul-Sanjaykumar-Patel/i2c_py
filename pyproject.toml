@@ -1,0 +1,62 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name = "i2c-lib"
+version = "1.0.0"
+description = "Universal I2C driver library for Python — Raspberry Pi, MicroPython, USB adapters"
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.9"
+authors = [
+    { name = "Ketul Sanjaykumar Patel" }
+]
+keywords = [
+    "i2c", "embedded", "raspberry-pi", "micropython",
+    "bme280", "mpu6050", "ssd1306", "sensor", "hardware"
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: System :: Hardware",
+    "Topic :: Software Development :: Embedded Systems",
+]
+
+# No hard dependencies — smbus2 is optional (suggested but not required)
+dependencies = []
+
+[project.optional-dependencies]
+linux = ["smbus2>=0.4.0"]
+dev   = ["pytest>=7.0", "pytest-cov", "ruff", "mypy"]
+all   = ["smbus2>=0.4.0", "pytest>=7.0", "pytest-cov", "ruff", "mypy"]
+
+[project.scripts]
+i2c = "i2c_lib.cli:main"
+
+[project.urls]
+Homepage   = "https://github.com/ketul-Sanjaykumar-Patel/i2c_py"
+Repository = "https://github.com/ketul-Sanjaykumar-Patel/i2c_py"
+Issues     = "https://github.com/ketul-Sanjaykumar-Patel/i2c_py/issues"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["i2c_lib*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts   = "-v --tb=short"
+
+[tool.ruff]
+line-length = 88
+target-version = "py39"
+
+[tool.mypy]
+python_version = "3.9"
+ignore_missing_imports = true
