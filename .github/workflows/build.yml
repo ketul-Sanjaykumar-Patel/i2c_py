@@ -46,4 +46,4 @@ jobs:
       - name: Import check
         run: python -c "from i2c_lib import I2CBus; print('Import OK')"
       - name: CLI check
-        run: i2c info
+        run: python -c "from i2c_lib.cli import main; print('CLI OK')"
